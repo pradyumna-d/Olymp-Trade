@@ -1,0 +1,21 @@
+package killhouser.trading.exception;
+
+public enum ErrorType {
+  CONNECTION_ERROR,
+
+  INTERNAL_ERROR,
+
+  AUTHENTICATION_ERROR,
+
+  RATE_LIMIT_ERROR,
+
+  AUTHORISATION_ERROR,
+
+  VALIDATION_ERROR,
+
+  HTTP_CLIENT_ERROR,
+
+  STORAGE_ERROR,
+
+  FORBIDDEN_ERROR;
+}

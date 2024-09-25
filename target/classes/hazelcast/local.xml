@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hazelcast xmlns="http://www.hazelcast.com/schema/config"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.hazelcast.com/schema/config
+           http://www.hazelcast.com/schema/config/hazelcast-config-5.3.xsd">
+
+    <cluster-name>local</cluster-name>
+    <instance-name>local-Instance</instance-name>
+
+    <management-center scripting-enabled="false" console-enabled="false" data-access-enabled="true"/>
+    <network>
+        <rest-api enabled="true">
+            <endpoint-group name="DATA" enabled="true"/>
+        </rest-api>
+        <join>
+            <multicast enabled="false"/>
+        </join>
+    </network>
+
+    <map name="login_otp_session">
+        <time-to-live-seconds>60</time-to-live-seconds>  <!--1 min-->
+    </map>
+
+    <map name="*.ttl15min">
+        <eviction max-size-policy="USED_HEAP_SIZE" eviction-policy="LRU" size="4"/>
+        <time-to-live-seconds>900</time-to-live-seconds>  <!--15 min-->
+    </map>
+    <map name="*.ttl24hr">
+        <eviction max-size-policy="USED_HEAP_SIZE" eviction-policy="LRU" size="4"/>
+        <time-to-live-seconds>86400</time-to-live-seconds>  <!--15 min-->
+    </map>
+</hazelcast>

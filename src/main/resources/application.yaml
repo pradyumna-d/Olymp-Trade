@@ -1,0 +1,71 @@
+server:
+  port: 10050
+  servlet:
+    contextPath: /killhouser
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  server:
+    port: 10051
+
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/trading
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017
+      database: thanos
+  hazelcast:
+    config: classpath:hazelcast/local.xml
+
+springdoc:
+  show-actuator: true
+  swagger-ui:
+    docExpansion: "none"
+
+authentication-config:
+  secretKey: e376d24c-3178-4b2e-a2cf-d09fa1f915c9
+  whitelistedPhoneNumbers:
+    - "7892981741"
+  whitelistedApis:
+    - "/**"
+  cors:
+    allowedOrigins: [ "*" ]
+    allowedMethods: [ "*" ]
+    allowedHeaders: [ "*" ]
+  authTokenExpiryTimeInMilliSeconds: 432000000 # 5 days
+  refreshTokenExpiryTimeInSeconds: 2592000 # 30 days
+
+servlet-logging:
+  applicationName: killhouser
+  requestConfig:
+    enabled: true
+  responseConfig:
+    enabled: true
+
+http-client-config:
+  olymp-trade:
+    endpoint:
+      host: gw.olymptrade.com
+      port: 443
+      secure: true
+      basePath: /api
+    connections: 10
+    idleTimeOutSeconds: 30
+    connectTimeoutMs: 10000
+    opTimeoutMs: 10000

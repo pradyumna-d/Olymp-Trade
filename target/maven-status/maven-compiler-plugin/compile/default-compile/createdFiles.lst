@@ -1,8 +1,10 @@
 killhouser/trading/models/auth/Cors.class
+killhouser/trading/utils/TimeUtils.class
 killhouser/trading/service/price/PriceService.class
 killhouser/trading/config/command/CommandConfig.class
 killhouser/trading/exception/BaseException.class
 killhouser/trading/storage/mysql/entity/commodity/CommodityIndexEntity.class
+killhouser/trading/storage/mysql/CommodityIndexEntityService.class
 killhouser/trading/exception/ResponseCode$3.class
 killhouser/trading/config/authentication/WebSecurityConfig.class
 killhouser/trading/exception/ResponseCode$24.class
@@ -55,6 +57,7 @@ killhouser/trading/exception/ResponseCode$22.class
 killhouser/trading/storage/mysql/entity/commodity/CommodityIndexEntity$CommodityIndexEntityBuilder.class
 killhouser/trading/exception/ResponseCode$1.class
 killhouser/trading/config/authentication/AuthenticationConfig.class
+killhouser/trading/storage/mysql/repository/CommodityIndexRepository.class
 killhouser/trading/common/cache/HazelCastCacheStore.class
 killhouser/trading/common/authentication/AuthEntryPointJwt.class
 killhouser/trading/models/response/PriceData2$PriceData2Builder.class

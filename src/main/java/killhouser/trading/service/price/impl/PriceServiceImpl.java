@@ -5,14 +5,20 @@ import killhouser.trading.exception.BaseException;
 import killhouser.trading.exception.ResponseCode;
 import killhouser.trading.models.request.FetchTradingPriceRequest;
 import killhouser.trading.models.response.FetchTradingPriceResponse;
+import killhouser.trading.models.response.PriceData2;
 import killhouser.trading.service.price.PriceService;
+import killhouser.trading.storage.mysql.CommodityIndexEntityService;
+import killhouser.trading.storage.mysql.entity.commodity.CommodityIndexEntity;
 import killhouser.trading.utils.JacksonUtil;
+import killhouser.trading.utils.TimeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +27,8 @@ import java.util.regex.Pattern;
 public class PriceServiceImpl implements PriceService {
 
     @Autowired OlympTradeCommand olympTradeCommand;
+
+    @Autowired CommodityIndexEntityService commodityIndexEntityService;
     @Override
     public FetchTradingPriceResponse fetchPrice(FetchTradingPriceRequest request) {
         return olympTradeCommand.getPriceHistory(request);
@@ -69,6 +77,17 @@ public class PriceServiceImpl implements PriceService {
             // Handle any exceptions that occur during script execution or deserialization
             throw BaseException.create(ResponseCode.JSON_ERROR, "unable to deserialize");
         }
+    }
+
+    @Override
+    public void addPriceData(FetchTradingPriceRequest request) {
+        FetchTradingPriceResponse response = fetchTradingPrice(request.getFrom(), request.getTo());
+        List<CommodityIndexEntity> commodityIndexEntities = new ArrayList<>();
+        for (PriceData2 priceData : response.getData()){
+            CommodityIndexEntity commodityIndex = CommodityIndexEntity.builder().price(priceData.getMid()).epochTimeStamp(priceData.getTs()).build();
+            commodityIndexEntities.add(commodityIndex);
+        }
+        commodityIndexEntityService.saveAll(commodityIndexEntities);
     }
 
     private String cleanMalformedJson(String input) {

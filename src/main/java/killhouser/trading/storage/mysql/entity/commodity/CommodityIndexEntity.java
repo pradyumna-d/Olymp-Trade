@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -23,7 +24,7 @@ public class CommodityIndexEntity extends BaseEntity {
     private LocalDateTime timeStamp;
 
     @Column(name = "epoch")
-    private Double epochTimeStamp;
+    private BigDecimal epochTimeStamp;
 
     @Column(name = "price")
     private Double price;

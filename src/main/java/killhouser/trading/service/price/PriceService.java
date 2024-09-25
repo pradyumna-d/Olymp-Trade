@@ -9,4 +9,6 @@ public interface PriceService {
     FetchTradingPriceResponse fetchPrice(FetchTradingPriceRequest request);
 
     FetchTradingPriceResponse fetchTradingPrice(Long from, Long to);
+
+    void addPriceData(FetchTradingPriceRequest request);
 }

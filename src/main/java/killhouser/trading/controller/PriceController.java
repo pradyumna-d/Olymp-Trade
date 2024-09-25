@@ -35,4 +35,9 @@ public class PriceController {
         return priceService.fetchTradingPrice(from, to);
     }
 
+    @PostMapping(path = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addPriceData(@RequestBody FetchTradingPriceRequest request){
+        priceService.addPriceData(request);
+    }
+
 }

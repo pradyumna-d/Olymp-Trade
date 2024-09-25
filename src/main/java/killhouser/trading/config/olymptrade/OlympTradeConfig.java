@@ -8,5 +8,4 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class OlympTradeConfig extends HttpClientConfiguration {
-}
+public class OlympTradeConfig extends HttpClientConfiguration {}

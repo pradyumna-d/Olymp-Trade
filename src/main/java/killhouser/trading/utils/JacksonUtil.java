@@ -3,17 +3,16 @@ package killhouser.trading.utils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.irex.servlet.logging.util.StringUtil;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
+import java.util.Objects;
 import killhouser.trading.exception.BaseException;
 import killhouser.trading.exception.ResponseCode;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map;
-import java.util.Objects;
 
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -104,8 +103,7 @@ public class JacksonUtil {
       return mapper.writeValueAsString(object);
     } catch (Exception e) {
       String logMessage = String.format("Error in serializing string object value :: %s", object);
-      throw BaseException.create(
-          ResponseCode.JSON_ERROR, "error in serialization", logMessage, e);
+      throw BaseException.create(ResponseCode.JSON_ERROR, "error in serialization", logMessage, e);
     }
   }
 

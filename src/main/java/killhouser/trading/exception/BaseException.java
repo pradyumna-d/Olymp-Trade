@@ -1,12 +1,10 @@
 package killhouser.trading.exception;
 
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import killhouser.trading.utils.StringUtils;
 import lombok.Builder;
 import lombok.Getter;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Getter
 public class BaseException extends RuntimeException {

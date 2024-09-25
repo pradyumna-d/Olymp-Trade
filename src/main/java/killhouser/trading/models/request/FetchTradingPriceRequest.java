@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FetchTradingPriceRequest {
 
-    private String pair;
+  private String pair;
 
-    private Long from;
+  private Long from;
 
-    private Long to;
+  private Long to;
 }

@@ -2,7 +2,6 @@ package killhouser.trading.common.authentication;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
-
 import java.util.*;
 
 public class MutableHttpServletRequest extends HttpServletRequestWrapper {

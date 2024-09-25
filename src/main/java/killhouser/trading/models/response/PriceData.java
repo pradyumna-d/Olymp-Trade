@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PriceData {
 
-    @JsonProperty("ts")
-    private Double epochTime;
+  @JsonProperty("ts")
+  private Double epochTime;
 
-    @JsonProperty("mid")
-    private Double price;
+  @JsonProperty("mid")
+  private Double price;
 }

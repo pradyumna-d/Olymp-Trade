@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface PriceService {
-    FetchTradingPriceResponse fetchPrice(FetchTradingPriceRequest request);
+  FetchTradingPriceResponse fetchPrice(FetchTradingPriceRequest request);
 
-    FetchTradingPriceResponse fetchTradingPrice(Long from, Long to);
+  FetchTradingPriceResponse fetchTradingPrice(Long from, Long to);
 
-    void addPriceData(FetchTradingPriceRequest request);
+  void addPriceData(FetchTradingPriceRequest request);
 }

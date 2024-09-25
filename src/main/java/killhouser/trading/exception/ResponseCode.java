@@ -320,7 +320,7 @@ public enum ResponseCode implements ErrorCode {
     }
   },
 
-  OLYMP_TRADE_ERROR{
+  OLYMP_TRADE_ERROR {
     @Override
     public int httpStatusCode() {
       return 500;

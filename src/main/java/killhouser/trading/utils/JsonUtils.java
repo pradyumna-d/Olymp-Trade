@@ -2,16 +2,13 @@ package killhouser.trading.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import killhouser.trading.exception.BaseException;
-import killhouser.trading.exception.ResponseCode;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
+import killhouser.trading.exception.BaseException;
+import killhouser.trading.exception.ResponseCode;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class JsonUtils {
@@ -85,7 +82,7 @@ public class JsonUtils {
     }
   }
 
-  public  byte[] convertToBytes(Object object) {
+  public byte[] convertToBytes(Object object) {
     try {
       return mapper.writeValueAsBytes(object);
     } catch (IOException var4) {

@@ -1,11 +1,10 @@
 package killhouser.trading.utils;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.time.*;
 import java.util.Objects;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TimeUtils {
@@ -53,7 +52,9 @@ public class TimeUtils {
 
     // Convert BigDecimal to milliseconds and nanoseconds
     long millis = epochTime.longValue(); // Get the milliseconds part
-    long nanos = epochTime.remainder(BigDecimal.ONE) // Get the fractional part
+    long nanos =
+        epochTime
+            .remainder(BigDecimal.ONE) // Get the fractional part
             .multiply(BigDecimal.valueOf(1_000_000_000L)) // Convert to nanoseconds
             .longValue();
 
@@ -61,6 +62,4 @@ public class TimeUtils {
     Instant instant = Instant.ofEpochSecond(millis / 1000, nanos);
     return instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
   }
-
-
 }

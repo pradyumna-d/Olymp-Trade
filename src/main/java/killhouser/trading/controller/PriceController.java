@@ -1,5 +1,7 @@
 package killhouser.trading.controller;
 
+import java.io.IOException;
+import killhouser.trading.models.enums.Index;
 import killhouser.trading.models.request.FetchTradingPriceRequest;
 import killhouser.trading.models.response.FetchTradingPriceResponse;
 import killhouser.trading.service.price.PriceService;
@@ -24,6 +26,15 @@ public class PriceController {
   public FetchTradingPriceResponse getPrice(
       @RequestParam(value = "from") Long from, @RequestParam("to") Long to) {
     return priceService.fetchTradingPrice(from, to);
+  }
+
+  @GetMapping(path = "/v2")
+  public FetchTradingPriceResponse fetchPrice(
+      @RequestParam("from") Long from,
+      @RequestParam("to") Long to,
+      @RequestParam("index") Index index)
+      throws IOException, InterruptedException {
+    return priceService.fetchPriceV2(from, to, index);
   }
 
   @PostMapping(path = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)

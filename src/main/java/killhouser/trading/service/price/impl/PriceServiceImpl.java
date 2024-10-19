@@ -1,6 +1,7 @@
 package killhouser.trading.service.price.impl;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.regex.Pattern;
 import killhouser.trading.command.OlympTradeCommand;
 import killhouser.trading.exception.BaseException;
 import killhouser.trading.exception.ResponseCode;
+import killhouser.trading.models.enums.Index;
 import killhouser.trading.models.request.FetchTradingPriceRequest;
 import killhouser.trading.models.response.FetchTradingPriceResponse;
 import killhouser.trading.models.response.PriceData2;
@@ -100,6 +102,12 @@ public class PriceServiceImpl implements PriceService {
       commodityIndexEntities.add(commodityIndex);
     }
     commodityIndexEntityService.saveAll(commodityIndexEntities);
+  }
+
+  @Override
+  public FetchTradingPriceResponse fetchPriceV2(Long from, Long to, Index index)
+      throws IOException, InterruptedException {
+    return olympTradeCommand.fetchPrice(index, from, to);
   }
 
   private String cleanMalformedJson(String input) {

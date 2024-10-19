@@ -330,5 +330,17 @@ public enum ResponseCode implements ErrorCode {
     public ErrorType errorType() {
       return ErrorType.INTERNAL_ERROR;
     }
+  },
+
+  TOKEN_EXPIRED_ERROR {
+    @Override
+    public int httpStatusCode() {
+      return 401;
+    }
+
+    @Override
+    public ErrorType errorType() {
+      return ErrorType.AUTHORISATION_ERROR;
+    }
   }
 }

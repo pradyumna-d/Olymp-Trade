@@ -64,6 +64,8 @@ public class PriceServiceImpl implements PriceService {
       // Get the output as a string
       String rawOutput = output.toString();
 
+      log.info("Script output is :: {}", rawOutput);
+
       // Find and clean malformed JSON object
       String cleanedOutput = cleanMalformedJson(rawOutput);
 
@@ -72,6 +74,13 @@ public class PriceServiceImpl implements PriceService {
       // Deserialize the clean JSON output into FetchTradingPriceResponse
       return JacksonUtil.deserialize(cleanedOutput, FetchTradingPriceResponse.class);
 
+    } catch (BaseException be) {
+      if (401 == be.getHttpStatusCode()) {
+        throw BaseException.create(
+            ResponseCode.TOKEN_EXPIRED_ERROR, "The cookie in the script is expired!");
+      } else {
+        throw BaseException.create(ResponseCode.JSON_ERROR, "unable to deserialize");
+      }
     } catch (Exception e) {
       // Handle any exceptions that occur during script execution or deserialization
       throw BaseException.create(ResponseCode.JSON_ERROR, "unable to deserialize");
@@ -97,6 +106,11 @@ public class PriceServiceImpl implements PriceService {
 
     int startIndex = input.indexOf("{");
     String jsonData = input.substring(startIndex);
+    log.info("JSON data is :: {}", jsonData);
+    if (jsonData.contains("The access token expired")) {
+      throw BaseException.create(
+          ResponseCode.TOKEN_EXPIRED_ERROR, "The cookie in the script is expired!");
+    }
     // Regular expression to match only valid objects: {"ts":<number>,"mid":<number>}
     String pattern = "\\{\"ts\":\\d+\\.\\d+,\"mid\":\\d+\\.\\d+\\}";
     Pattern regex = Pattern.compile(pattern);
